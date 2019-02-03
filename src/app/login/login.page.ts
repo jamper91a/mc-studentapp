@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MyCentro} from '../providers/mycentro';
-import {Answer} from '../providers/answers/Answer';
 import {AnswerLogin} from '../providers/answers/AnswerLogin';
 import {Util} from '../providers/util';
 import {User} from '../providers/POJO/User';
+import {NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ import {User} from '../providers/POJO/User';
 })
 export class LoginPage implements OnInit {
 
-  private account: {
+  public account: {
       username: string,
       password: string
   } = {
@@ -22,14 +22,14 @@ export class LoginPage implements OnInit {
 
   constructor(
       public myCentro: MyCentro,
-      public util:Util
+      public util:Util,
+      public navCtrl:NavController
   ) { }
 
   ngOnInit() {
       let user:User = JSON.parse(this.util.getPreference("user"));
-      console.log(user);
       if(user)
-          alert("Hola: "+user.name);
+          this.navCtrl.navigateRoot('home');
   }
 
   async login() {
@@ -40,6 +40,7 @@ export class LoginPage implements OnInit {
                   alert("Logeado Satisfactoriamente");
                   this.util.savePreference("token", ans.data.token);
                   this.util.savePreference("user", JSON.stringify(ans.data.user));
+                  this.navCtrl.navigateRoot('home');
               }else{
                   alert("Incovenientes al logear");
               }

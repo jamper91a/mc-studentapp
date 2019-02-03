@@ -1,6 +1,8 @@
 {
   "name": "MyCentroStudents",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "c05f1959"
 }

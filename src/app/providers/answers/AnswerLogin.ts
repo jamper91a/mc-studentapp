@@ -1,4 +1,4 @@
-import {User} from '../../../providers/pojo/User';
+import {User} from '../POJO/User';
 import {Answer} from './Answer';
 
 export class AnswerLogin extends Answer {
