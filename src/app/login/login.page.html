@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>AnswerLogin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<form>
+
+  <ion-item>
+    <ion-input [(ngModel)]="account.username" name="email" placeholder="Username" type="email"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="account.password" name="password" placeholder="Password" type="password"></ion-input>
+  </ion-item>
+
+  <ion-button (click)="login()">
+    <ion-ripple-effect></ion-ripple-effect>
+    AnswerLogin
+  </ion-button>
+</form>
+
+</ion-content>
