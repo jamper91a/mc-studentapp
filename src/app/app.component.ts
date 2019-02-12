@@ -16,16 +16,20 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
-    },
-    {
       title: 'My guides',
       url: '/guides',
       icon: 'list'
     }
   ];
+
+public _appPages = [ 
+  {
+    title: 'List',
+    url: '/list',
+    icon: 'list'
+  },
+];
+
 
   constructor(
     private platform: Platform,
