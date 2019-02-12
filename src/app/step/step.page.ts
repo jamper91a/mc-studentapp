@@ -11,7 +11,9 @@ export class StepPage implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   idguide: string;
-  public nameguide: string
+  nameguide: string;
+  namestep: string;
+  idstep: string;
 
   back(){
     //this.router.navigateByUrl('/steps/:1');
