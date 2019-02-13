@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 // import { Api,Util,MyCentro } from '../providers/providers';
 import { Util} from './providers/util';
 import { MyCentro} from './providers/mycentro';
+import {GuidesProvider} from './providers/guidesProvider';
 import { ApiService } from './providers/api.service';
 import {HttpClientModule } from '@angular/common/http';
 
@@ -27,6 +28,7 @@ import {HttpClientModule } from '@angular/common/http';
       // Api,
       Util,
       MyCentro,
+      GuidesProvider,
       ApiService,
     StatusBar,
     SplashScreen,
