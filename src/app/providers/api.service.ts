@@ -4,13 +4,14 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
 import { Answer } from './answers/Answer';
 import { Util } from './util';
+import { environment as ENV } from '../../environments/environment';
 
 
 const httpOptions = {
     headers: new HttpHeaders(),
     params: new HttpParams(),
 };
-const apiUrl = "http://localhost:1337/";
+const apiUrl = ENV.BASE_URL;
 @Injectable({
   providedIn: 'root'
 })

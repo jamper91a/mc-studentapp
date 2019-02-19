@@ -17,8 +17,8 @@ const routes: Routes = [
   },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'guides', loadChildren: './guides/guides.module#GuidesPageModule' },
-  { path: 'steps/:idguide/:nameguide', loadChildren: './steps/steps.module#StepsPageModule' },
-  { path: 'step/:idstep/:namestep/:nameguide/:idguide', loadChildren: './step/step.module#StepPageModule' }
+  { path: 'steps/:idguide/:stepNumber', loadChildren: './steps/steps.module#StepsPageModule' },
+  { path: 'step/:stepId/:namestep', loadChildren: './step/step.module#StepPageModule' }
 ];
 
 @NgModule({

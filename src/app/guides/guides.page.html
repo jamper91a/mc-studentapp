@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>guides</ion-title>
+    <ion-title>Guides</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -9,11 +9,11 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let item of items" [routerLink]="'/steps/' + item.id + '/' + item.title" routerDirection="forward">
+    <ion-item *ngFor="let guide of guides" [routerLink]="'/steps/' + guide.guides_id.id + '/' + guide.step_number" routerDirection="forward">
       <ion-icon name="build" slot="start"></ion-icon>
-      {{item.title}}
+      {{guide.guides_id.name}}
       <div class="item-note" slot="end">
-        {{item.note}}
+        {{guide.guides_id.name}}
       </div>
     </ion-item>
   </ion-list>

@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
               if(ans){
                   alert("Logeado Satisfactoriamente");
                   this.util.savePreference("token", ans.data.token);
-                  this.util.savePreference("user", JSON.stringify(ans.data.user));
+                  this.util.savePreference(this.util.constants.user, JSON.stringify(ans.data.user));
               }else{
                   alert("Incovenientes al logear");
               }

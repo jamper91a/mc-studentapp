@@ -6,6 +6,5 @@ export class AnswerLogin extends Answer {
         token:string;
         user: User
     };
-    lio:string="eee";
 
 }

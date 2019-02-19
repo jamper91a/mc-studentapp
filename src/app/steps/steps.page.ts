@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import {User} from '../providers/POJO/User';
+import {AnswerGetGuidesByUserId} from '../providers/answers/AnswerGetGuidesByUserId';
+import {Util} from '../providers/util';
+import {MyCentro} from '../providers/mycentro';
+import {AnswerGetGuideById} from '../providers/answers/AnswerGetGuideById';
+import {Step} from '../providers/POJO/Step';
 @Component({
   selector: 'app-steps',
   templateUrl: './steps.page.html',
@@ -22,56 +27,45 @@ export class StepsPage implements OnInit {
     'build'
   ];
 
-  public items: Array<{ title: string; note: string; icon: string; idstep: string; isdone: boolean }> = [];
-
-  idguide: string;
+  public steps:Step[];
+  public idguide: number;
   public nameguide: string;
+  public stepNumber: number;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(
+      private route: ActivatedRoute,
+      public myCentro: MyCentro,
+      public util:Util
+  )
+  {}
 
-      this.items.push(
-        {
-          title: 'Change money',
-          note: 'This is item #',
-          icon: this.icons[Math.floor(Math.random() * this.icons.length)],
-          idstep: '1',
-          isdone: true,
-        },
-        {
-          title: 'Get Sim Card',
-          note: 'This is item #',
-          icon: this.icons[Math.floor(Math.random() * this.icons.length)],
-          idstep: '1',
-          isdone: false,
-        },
-        {
-          title: 'Bank Account',
-          note: 'This is item #',
-          icon: this.icons[Math.floor(Math.random() * this.icons.length)],
-          idstep: '1',
-          isdone: false,
-        },
-        {
-          title: 'IRD Number',
-          note: 'This is item #',
-          icon: this.icons[Math.floor(Math.random() * this.icons.length)],
-          idstep: '1',
-          isdone: false,
-        },
-        {
-          title: 'AT Card',
-          note: 'This is item #',
-          icon: this.icons[Math.floor(Math.random() * this.icons.length)],
-          idstep: '1',
-          isdone: false,
-        },
-    );
-
+  getIcon(){
+      return this.icons[1];
   }
 
+    async getGuide() {
+        let call = await this.myCentro.getGuideById(this.idguide);
+        call.subscribe(
+            (ans:AnswerGetGuideById)=>{
+                if(ans){
+                    this.steps= ans.data.steps;
+                    this.nameguide = ans.data.name;
+                }else{
+                    alert("Incovenientes al obtener la guia");
+                }
+            },
+            ()=>{
+                alert("Error general");
+            }
+        );
+
+    }
+
+
   ngOnInit() {
-    this.idguide = this.route.snapshot.paramMap.get('idguide');
-    this.nameguide = this.route.snapshot.paramMap.get('nameguide');
+    this.idguide = parseInt(this.route.snapshot.paramMap.get('idguide'));
+    this.stepNumber = parseInt(this.route.snapshot.paramMap.get('stepNumber'));
+    this.getGuide();
   }
 
 }
