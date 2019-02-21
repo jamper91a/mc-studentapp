@@ -9,7 +9,10 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let guide of guides" [routerLink]="'/steps/' + guide.guides_id.id + '/' + guide.step_number" routerDirection="forward">
+    <ion-item
+            *ngFor="let guide of guides"
+            [routerLink]="'/steps/' + guide.guides_id.id + '/' + guide.step_number"
+            routerDirection="forward">
       <ion-icon name="build" slot="start"></ion-icon>
       {{guide.guides_id.name}}
       <div class="item-note" slot="end">

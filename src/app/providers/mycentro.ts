@@ -23,7 +23,7 @@ export class MyCentro {
 
 
     async login(body:any){
-        const dialog = await this.loadingCtrl.create({message: "Ingresando"});
+        const dialog = await this.loadingCtrl.create({message: "Logging"});
         await dialog.present();
         let call =this.api.post('login', body);
             call.subscribe(
@@ -35,7 +35,7 @@ export class MyCentro {
     }
 
     async getGuidesByUserId(userId:number){
-        const dialog = await this.loadingCtrl.create({message: "Ingresando"});
+        const dialog = await this.loadingCtrl.create({message: "Getting"});
         await dialog.present();
         let call =this.api.get(`studentsHasGuides/findByUserId?id=${userId}`, {});
         call.subscribe(
@@ -47,7 +47,7 @@ export class MyCentro {
     }
 
     async getGuideById(guideId:number){
-        const dialog = await this.loadingCtrl.create({message: "Ingresando"});
+        const dialog = await this.loadingCtrl.create({message: "Getting"});
         await dialog.present();
         const body={};
         let call =this.api.get(`guides/${guideId}`, body);
@@ -60,7 +60,7 @@ export class MyCentro {
     }
 
     async getStep(stepId:number){
-        const dialog = await this.loadingCtrl.create({message: "Ingresando"});
+        const dialog = await this.loadingCtrl.create({message: "Getting"});
         await dialog.present();
         const body={};
         let call =this.api.get(`steps/${stepId}`, body);
@@ -75,7 +75,7 @@ export class MyCentro {
 
 
     async finishStep(step:number, guideId:number){
-        const dialog = await this.loadingCtrl.create({message: "Ingresando"});
+        const dialog = await this.loadingCtrl.create({message: "Finishing"});
         await dialog.present();
         const user:User = JSON.parse(this.util.getPreference(this.util.constants.user));
         const body={

@@ -1,66 +1,72 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {MyCentro} from '../providers/mycentro';
 import {AnswerLogin} from '../providers/answers/AnswerLogin';
-import {AnswerGetGuideById} from '../providers/answers/AnswerGetGuideById';
 import {AnswerGetStep} from '../providers/answers/AnswerGetStep';
 import {Step} from '../providers/POJO/Step';
+import {Util} from '../providers/util';
+import {NavController} from '@ionic/angular';
 
 @Component({
-  selector: 'app-step',
-  templateUrl: './step.page.html',
-  styleUrls: ['./step.page.scss'],
+    selector: 'app-step',
+    templateUrl: './step.page.html',
+    styleUrls: ['./step.page.scss'],
 })
 export class StepPage implements OnInit {
+    public stepId: number;
+    public step: Step;
 
-  constructor(
-      private route: ActivatedRoute,
-      private myCentro:MyCentro
-  ) {}
+    constructor(
+        private route: ActivatedRoute,
+        private myCentro: MyCentro,
+        public util: Util,
+        public navCtrl: NavController,
+    ) {
+        this.step = new Step();
+    }
+    ngOnInit() {
 
-  public stepId: number;
-  public step: Step;
+    }
 
-  back(){
-    //this.router.navigateByUrl('/steps/:1');
-  }
+    ionViewWillEnter() {
 
-  ngOnInit() {
-    this.stepId = parseInt(this.route.snapshot.paramMap.get('stepId'));
-    this.getGuide();
-  }
+        this.stepId = parseInt(this.route.snapshot.paramMap.get('stepId'));
+        this.getStep();
+    }
 
 
-
-  async getGuide() {
+    async getStep() {
         let call = await this.myCentro.getStep(this.stepId);
         call.subscribe(
-            (ans:AnswerGetStep)=>{
-                if(ans){
-                    this.step= ans.data;
-                }else{
-                    alert("Incovenientes al obtener la guia");
+            (ans: AnswerGetStep) => {
+                if (ans) {
+                    this.step = ans.data;
+                } else {
+                    this.util.show_toast('Error getting the step');
                 }
             },
-            ()=>{
-                alert("Error general");
+            () => {
+                this.util.show_toast('General Error');
             }
         );
 
-  }
+    }
 
-  async finishStep(){
-      let call = await this.myCentro.finishStep(this.step.number,this.step.guides_id.id);
-      call.subscribe(
-          (ans:AnswerLogin)=>{
-              if(ans){
-                  alert("Paso finalizado con exito");
-              }else{
-                  alert("Incovenientes al finalizar paso");
-              }
-          },
-          ()=>{}
-      );
-  }
+    async finishStep() {
+        let call = await this.myCentro.finishStep(this.step.number, this.step.guides_id.id);
+        call.subscribe(
+            (ans: AnswerLogin) => {
+                if (ans) {
+                    this.util.show_toast('Step finish successfully');
+                    this.navCtrl.navigateBack(
+                        `steps/${this.step.guides_id.id}/${this.step.number+1}`);
+                } else {
+                    this.util.show_toast('Error finishing the step');
+                }
+            },
+            () => {
+            }
+        );
+    }
 
 }

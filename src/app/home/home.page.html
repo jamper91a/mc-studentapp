@@ -1,20 +1,24 @@
+
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      MyCentro
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-card class="welcome-card">
-      <ion-img src="/assets/icon/logo-elcentro.png"></ion-img>
+      <ion-row>
+        <ion-col col-4></ion-col>
+        <ion-col col-4><ion-img src="/assets/icon/logo-elcentro.png"></ion-img></ion-col>
+        <ion-col col-4></ion-col>
+      </ion-row>
       <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to MyCentro</ion-card-title>
+        <ion-card-title>Welcome: {{user.name}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <p>This application will guide you with all the necessary information so that your experience as an international student is exploited to the fullest.</p>
