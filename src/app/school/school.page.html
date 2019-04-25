@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="school">{{school.name}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div *ngIf="school">
+
+    <ion-img [src]="school.photo"></ion-img>
+    <p>{{school.info}}}</p>
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="arrow-dropup"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button>
+          <a [routerLink]="'/courses/' + school.id">
+            <ion-icon name="filing"></ion-icon>
+          </a>
+        </ion-fab-button>
+        <ion-fab-button>
+          <ion-icon name="pin"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+  </div>
+  <!-- Skeleton screen -->
+  <div *ngIf="!school">
+    <div class="ion-padding custom-skeleton">
+      <ion-thumbnail style="width: 100%; height: 150px;">
+        <ion-skeleton-text animated style="width: 100%; line-height: 150px;"></ion-skeleton-text>
+      </ion-thumbnail>
+      <div>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

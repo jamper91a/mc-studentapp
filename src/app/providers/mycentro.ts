@@ -8,6 +8,9 @@ import {User} from './POJO/User';
 import {AnswerGetGuideById} from './answers/AnswerGetGuideById';
 import {AnswerGetGuidesByUserId} from './answers/AnswerGetGuidesByUserId';
 import {AnswerGetStep} from './answers/AnswerGetStep';
+import {AnswerGetSchools} from './answers/AnswerGetSchools';
+import {AnswerGetSchool} from './answers/AnswerGetSchool';
+import {AnswerGetCourses} from './answers/AnswerGetCourses';
 
 
 
@@ -86,6 +89,42 @@ export class MyCentro {
         let call =this.api.post('studentsHasGuides/finishStep', body);
         call.subscribe(
             (res)=>{return res;},
+            ()=>{},
+            ()=>{dialog.dismiss();}
+        );
+        return call;
+    }
+
+    async getSchools(){
+        const dialog = await this.loadingCtrl.create({message: "Getting"});
+        await dialog.present();
+        let call =this.api.get(`schools`, {});
+        call.subscribe(
+            (res:AnswerGetSchools)=>{return res;},
+            ()=>{},
+            ()=>{dialog.dismiss();}
+        );
+        return call;
+    }
+
+    async getSchool(schoolId:number){
+        const dialog = await this.loadingCtrl.create({message: "Getting"});
+        await dialog.present();
+        let call =this.api.get(`schools/${schoolId}`, {});
+        call.subscribe(
+            (res:AnswerGetSchool)=>{return res;},
+            ()=>{},
+            ()=>{dialog.dismiss();}
+        );
+        return call;
+    }
+
+    async getCoursesBySchoolId(schoolId:number){
+        const dialog = await this.loadingCtrl.create({message: "Getting"});
+        await dialog.present();
+        let call =this.api.get(`courses/findBySchoolId?id=${schoolId}`, {});
+        call.subscribe(
+            (res:AnswerGetCourses)=>{return res;},
             ()=>{},
             ()=>{dialog.dismiss();}
         );

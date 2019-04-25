@@ -15,7 +15,7 @@ export class GuidesProvider {
     }
 
     async getGuides(body:any){
-        const dialog = await this.loadingCtrl.create({message: "invoking method: getGuides"});
+        const dialog = await this.loadingCtrl.create({message: "invoking method: getSchools"});
         await dialog.present();
         let call = this.api.get('studentsHasGuides', body);
 

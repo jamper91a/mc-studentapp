@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Schools</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cards-bg">
+  <ion-list>
+    <ion-card *ngFor="let school of schools"
+              [routerLink]="'/school/' + school.id"
+              routerDirection="forward">
+      <ion-img [src]="school.photo"></ion-img>
+      <ion-card-header>
+        <ion-card-title>
+          {{school.name}}
+
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{school.resumen}}
+        <ion-row>
+
+        </ion-row>
+      </ion-card-content>
+      <ion-item>
+        <ion-button fill="outline" slot="end">More info</ion-button>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>
